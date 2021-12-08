@@ -1,0 +1,24 @@
+version: "3.9"
+
+networks:
+  frontend:
+    name: web_frontend
+    external: true
+  backend:
+    name: web_backend
+    external: true  
+
+services:     
+  v2ray:  
+    container_name: v2ray
+    image: jaegerdocker/v2fly-privoxy   
+    restart: "unless-stopped"   
+    networks:
+      - frontend    
+    ports:
+      - 8118:8118        
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /Data/web/v2ray/config.json:/etc/v2ray/config.json
+  
+  
